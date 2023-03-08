@@ -22,7 +22,7 @@
     <div class="col-4">
         <div class="mb-3">
             <label for="name" class="form-label">Name:</label>
-            <input type="text" class="form-control" id="name" name='name' placeholder="Name"
+            <input type="text" class="form-control" id="name" name='name' placeholder="Name" minlength="1" maxlength="50"
                 value="{{ old('name', $project->name) }}">
         </div>
     </div>
