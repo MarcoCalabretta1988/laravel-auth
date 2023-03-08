@@ -10,7 +10,7 @@
 
 <div class="row row-cols-2 bg-dark text-white py-5 rounded border border-warning">
   <div class="col d-flex justify-content-center align-items-center">
-  <img src="{{$project->image}}" alt="$project->name">
+  <img src="{{$project->image}}" alt="$project->name" class="img-fluid">
 </div>
   <div class="col">
     <p>{{$project->description}}</p>
