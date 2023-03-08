@@ -53,7 +53,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact(('project')));
     }
 
     /**
@@ -61,7 +61,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->all();
+        $project->github = "https://github.com/MarcoCalabretta1988";
+        $project->linkedin = "www.linkedin.com/in/marco-calabretta-2b1b13195";
+        $project->update($data);
+        return to_route('admin.projects.show', $project->id);
     }
 
     /**
