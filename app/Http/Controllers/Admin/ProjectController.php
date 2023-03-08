@@ -56,7 +56,7 @@ class ProjectController extends Controller
         $project->linkedin = "www.linkedin.com/in/marco-calabretta-2b1b13195";
         $project->fill($data);
         $project->save();
-        return to_route('admin.projects.show', $project->id);
+        return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg', 'Crezione avvenuta con successo');
     }
 
     /**
@@ -100,7 +100,7 @@ class ProjectController extends Controller
         $project->github = "https://github.com/MarcoCalabretta1988";
         $project->linkedin = "www.linkedin.com/in/marco-calabretta-2b1b13195";
         $project->update($data);
-        return to_route('admin.projects.show', $project->id);
+        return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg', 'Modifica avvenuta con successo');
     }
 
     /**

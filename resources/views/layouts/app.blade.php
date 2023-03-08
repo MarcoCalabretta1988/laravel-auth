@@ -32,8 +32,8 @@
       @include('includes.navbar')
 
         <main class="bg-secondary">
-            <div class="container">
-
+            <div class="container pt-5">
+               @include('includes.alert')
                 @yield('content')
             </div>
         </main>
