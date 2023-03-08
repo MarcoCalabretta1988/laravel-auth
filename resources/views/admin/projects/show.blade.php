@@ -20,7 +20,7 @@
 
 <div class="button-box d-flex justify-content-end mt-3">
     <a href="{{ route('admin.projects.edit',$project->id)}}"class="btn btn-warning"><i class="fa-solid fa-pencil"></i> Edit</a>
-   <form action="{{ route('admin.projects.destroy' , $project->id)}}" method="POST">
+   <form action="{{ route('admin.projects.destroy' , $project->id)}}" method="POST" class="delete-form">
     @method('DELETE')
     @csrf
     <button  type="submit" class="btn btn-danger mx-2"><i class="fa-solid fa-trash"></i> Delete</button>

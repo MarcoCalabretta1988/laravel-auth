@@ -2,7 +2,7 @@
     <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
         @method('PUT')
     @else
-        <form action="{{ route('admin.projects.store') }}" method="POST">
+        <form action="{{ route('admin.projects.store') }}" method="POST" >
 @endif
 @csrf
 
