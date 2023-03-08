@@ -31,8 +31,11 @@
 
       @include('includes.navbar')
 
-        <main class="container">
-            @yield('content')
+        <main class="bg-secondary">
+            <div class="container">
+
+                @yield('content')
+            </div>
         </main>
         @yield('scripts')
     </div>
