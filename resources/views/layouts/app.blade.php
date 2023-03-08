@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="icon-dev.webp" type="image/x-icon">
+    <link rel="icon"  href="{{ asset('icon-dev.webp')}}" />
     <title>{{ config('app.name', 'Laravel') }} | @yield('title') </title>
 
 
