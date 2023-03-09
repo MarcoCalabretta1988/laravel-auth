@@ -1,8 +1,8 @@
 @if ($project->exists)
-    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
     @else
-        <form action="{{ route('admin.projects.store') }}" method="POST" >
+        <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
 @endif
 @csrf
 
@@ -19,7 +19,8 @@
 
 {{-- FORM INPUT FIELD --}}
 <div class="row py-5">
-    <div class="col-4">
+   
+    <div class="col-6">
         <div class="mb-3">
             <label for="name" class="form-label">Name:</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name='name' placeholder="Name" minlength="1" maxlength="50"
@@ -31,10 +32,11 @@
                 @enderror
         </div>
     </div>
+
     <div class="col-4">
         <div class="mb-3">
             <label for="image" class="form-label">Url:</label>
-            <input type="url" class="form-control @error('image') is-invalid @enderror" id="image" name='image'
+            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name='image'
                 value="{{ old('image', $project->image) }}">
                 @error('image')
                    <div class="invalid-feedback">{{ $message}}</div>
@@ -42,6 +44,10 @@
                   <small class="text-muted">Inserisci l'imagine del progetto</small>
                 @enderror
         </div>
+    </div>
+
+    <div class="col-2">
+        <img src=" {{ asset('storage/' . $project->image)}}" alt="$project->name" class="img-fluid">
     </div>
    
     <div class="col-12">
