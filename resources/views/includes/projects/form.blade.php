@@ -47,7 +47,7 @@
     </div>
 
     <div class="col-2">
-        <img src=" {{ asset('storage/' . $project->image)}}" alt="$project->name" class="img-fluid">
+        <img src="{{ $project->image ? asset('storage/' . $project->image) : 'https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns='}}" alt="{{ old('name', $project->name) }}" class="img-fluid" id="img-prev">
     </div>
    
     <div class="col-12">
@@ -67,3 +67,4 @@
     <button type="submit" class="btn btn-success"><i class="fa-regular fa-floppy-disk"></i> Save</button>
 </div>
 </form>
+
