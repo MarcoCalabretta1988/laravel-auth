@@ -5,10 +5,15 @@
 @section('content')
 
 <section id="projects" >
-   <header class="d-flex justify-content-between align-items-center py-5">
+   <header class="d-flex justify-content-between align-items-center py-3">
     <h1 class="text-white">Projects:</h1>
     <a href="{{ route('admin.projects.create')}}" class="btn btn-success"><i class="fa-solid fa-plus"></i> Add</a>
    </header>
+   <div class="d-flex justify-content-end ">
+    @if($projects->hasPages())
+    {{ $projects->links()}}
+    @endif
+   </div>
     <table class="table table-dark table-striped ">
         <thead>
           <tr>
