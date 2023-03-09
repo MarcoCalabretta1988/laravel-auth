@@ -6,7 +6,8 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -38,7 +39,7 @@ class ProjectController extends Controller
         $request->validate([
             'name' => 'required|string| unique:projects| min:1| max:50',
             'description' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ], [
             'name.required' => 'Il campo nome é obbligatorio',
             'name.string' => 'Il nome deve essere una stringa',
@@ -47,11 +48,18 @@ class ProjectController extends Controller
             'name.unique' => "Il progetto $request->name è gia presente",
             'description.required' => 'Il campo descrizione é obbligatorio',
             'description.string' => 'La descrizione deve essere una stringa',
-            'image.url' => 'Il campo imagine deve essere un URL',
+            'image.image' => 'Il campo imagine deve essere un file',
+            'image.mimes' => 'L\'immagine deve essere JPEG,PNG,JPG',
         ]);
 
         $data = $request->all();
         $project = new Project();
+
+        if (Arr::exists($data, 'image')) {
+            $img_url = Storage::put('projects', $data['image']);
+            $data['image'] = $img_url;
+        }
+
         $project->github = "https://github.com/MarcoCalabretta1988";
         $project->linkedin = "www.linkedin.com/in/marco-calabretta-2b1b13195";
         $project->fill($data);
@@ -84,7 +92,7 @@ class ProjectController extends Controller
         $request->validate([
             'name' => ['required', 'string', Rule::unique('projects')->ignore($project->id), 'min:1', 'max:50'],
             'description' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ], [
             'name.required' => 'Il campo nome é obbligatorio',
             'name.string' => 'Il nome deve essere una stringa',
@@ -93,10 +101,16 @@ class ProjectController extends Controller
             'name.unique' => "Il progetto $project->name è gia presente",
             'description.required' => 'Il campo descrizione é obbligatorio',
             'description.string' => 'La descrizione deve essere una stringa',
-            'image.url' => 'Il campo imagine deve essere un URL',
+            'image.image' => 'Il file deve essere un Immagine',
+            'image.mimes' => 'L\'immagine deve essere JPEG,PNG,JPG',
         ]);
 
         $data = $request->all();
+        if (Arr::exists($data, 'image')) {
+            if ($project->image) Storage::delete($project->image);
+            $img_url = Storage::put('projects', $data['image']);
+            $data['image'] = $img_url;
+        }
         $project->github = "https://github.com/MarcoCalabretta1988";
         $project->linkedin = "www.linkedin.com/in/marco-calabretta-2b1b13195";
         $project->update($data);
@@ -108,6 +122,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image) Storage::delete($project->image);
         $project->delete();
         return to_route('admin.projects.index')->with('type', 'success')->with('msg', 'Progetto eliminato con successo');
     }

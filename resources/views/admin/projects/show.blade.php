@@ -10,11 +10,15 @@
 
 <div class="row row-cols-2 bg-dark text-white py-5 rounded border border-warning">
   <div class="col d-flex justify-content-center align-items-center">
-  <img src="{{$project->image}}" alt="$project->name" class="img-fluid">
+  <img src=@if($project->image){{ asset('storage/' . $project->image)}} @else "https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=PM_optEhHBTZkuJQLlCjLz-v3zzxp-1mpNQZsdjrbns=" @endif alt="$project->name" class="img-fluid">
 </div>
   <div class="col">
     <p>{{$project->description}}</p>
-
+    <hr>
+    <strong>Create at: </strong> <time>{{ $project->created_at}}</time>
+    <div>
+      <strong>Last update: </strong> <time>{{ $project->updated_at}}</time>
+    </div>
 </div>
 </div>
 

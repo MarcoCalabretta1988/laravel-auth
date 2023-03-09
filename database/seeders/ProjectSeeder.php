@@ -18,7 +18,6 @@ class ProjectSeeder extends Seeder
             $project = new Project();
             $project->name = $faker->words(3, true);
             $project->description = $faker->paragraphs(6, true);
-            $project->image = "https://picsum.photos/id/" . $faker->numberBetween(1, 50) . "/200";
             $project->github = "https://github.com/MarcoCalabretta1988";
             $project->linkedin = "www.linkedin.com/in/marco-calabretta-2b1b13195";
             $project->save();
