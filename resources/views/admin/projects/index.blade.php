@@ -19,6 +19,7 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Status</th>
             <th scope="col">Create At</th>
             <th scope="col">Update At</th>
             <th></th>
@@ -29,6 +30,17 @@
             <tr>    
             <th scope="row">{{$project->id}}</th>
             <td>{{$project->name}}</td>
+            <td>
+              
+              <form action="{{ route('admin.projects.toggle', $project->id)}}" method="POST">
+                @method('PATCH')
+                @csrf
+                <button type="submit" class="btn {{ $project->is_published ? 'text-success' : 'text-danger'}}"><i class="fa-solid fa-2x fa-toggle-{{ $project->is_published ? 'on' : 'off'}}"></i></button>
+              
+              </form>
+
+              
+            </td>
             <td>{{$project->created_at}}</td>
             <td>{{$project->updated_at}}</td>
             <td>
