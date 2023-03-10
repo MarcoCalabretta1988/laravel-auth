@@ -16,8 +16,8 @@
 
         <select class="form-select" id="filter" name="filter">
           <option value="">All</option>
-          <option value="published">Published</option>
-          <option value="drafts">Drafts</option>
+          <option @if($filter === 'published') selected @endif value="published">Published</option>
+          <option @if($filter === 'drafts') selected @endif  value="drafts">Drafts</option>
         </select>
         <button class="btn btn-primary" type="submit">Filter</button>
       </div>
