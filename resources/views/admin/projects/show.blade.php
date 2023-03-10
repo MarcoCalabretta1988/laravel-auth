@@ -19,6 +19,15 @@
     <div>
       <strong>Last update: </strong> <time>{{ $project->updated_at}}</time>
     </div>
+    <form action="{{ route('admin.projects.toggle', $project->id)}}" method="POST">
+      @method('PATCH')
+      @csrf
+      <button type="submit" class="btn {{ $project->is_published ? 'text-success' : 'text-danger'}}">
+        <i class="fa-solid fa-2x fa-toggle-{{ $project->is_published ? 'on' : 'off'}}"></i>
+          {{ $project->is_published ? 'Switch in draft' : 'Switch in published'}}
+        </button>
+    
+    </form>
 </div>
 </div>
 
