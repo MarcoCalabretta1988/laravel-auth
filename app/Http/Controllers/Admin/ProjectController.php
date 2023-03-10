@@ -14,9 +14,17 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::orderBy('updated_at', 'DESC')->Paginate(10);
+        $filter = $request->query('filter');
+        $query = Project::orderBy('updated_at', 'DESC');
+
+        if ($filter) {
+            $value = $filter === 'drafts' ? 0 : 1;
+            $query->where('is_published', $value);
+        }
+
+        $projects = $query->Paginate(10);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -135,6 +143,6 @@ class ProjectController extends Controller
         $msg =  $project->is_published ? 'successfully published' : 'Drafts';
         $type =  $project->is_published ? 'success' : 'info';
         $project->save();
-        return to_route('admin.projects.index')->with('type', $type)->with('msg', "Project is $msg.");
+        return redirect()->back()->with('type', $type)->with('msg', "Project is $msg.");
     }
 }

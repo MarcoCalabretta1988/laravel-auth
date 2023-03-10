@@ -9,11 +9,21 @@
     <h1 class="text-white">Projects:</h1>
     <a href="{{ route('admin.projects.create')}}" class="btn btn-success"><i class="fa-solid fa-plus"></i> Add</a>
    </header>
-   <div class="d-flex justify-content-end ">
-    @if($projects->hasPages())
-    {{ $projects->links()}}
-    @endif
-   </div>
+   
+   <form action="{{ route('admin.projects.index')}}" method="GET">
+     <div class="d-flex justify-content-between align-items-center mb-3">
+     <div class="input-group w-25">
+
+        <select class="form-select" id="filter" name="filter">
+          <option value="">All</option>
+          <option value="published">Published</option>
+          <option value="drafts">Drafts</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Filter</button>
+      </div>
+    </div>
+    </form>
+
     <table class="table table-dark table-striped ">
         <thead>
           <tr>
@@ -58,5 +68,11 @@
             @endforeach
         </tbody>
       </table>
+      <div class="d-flex justify-content-end align-items-center">
+    
+        @if($projects->hasPages())
+        {{ $projects->links()}}
+        @endif
+      </div>
 </section>
 @endsection
